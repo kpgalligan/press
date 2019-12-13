@@ -32,7 +32,7 @@ import me.saket.press.shared.rx.mapToOptional
 import me.saket.press.shared.rx.mapToSome
 import me.saket.press.shared.rx.observableInterval
 import me.saket.press.shared.ui.Presenter
-import me.saket.press.shared.util.Koptional
+import me.saket.press.shared.util.Optional
 
 class EditorPresenter(
   args: Args,
@@ -120,7 +120,7 @@ class EditorPresenter(
         .map { CloseNote }
   }
 
-  private fun Observable<EditorEvent>.toggleHintText(): Observable<Koptional<String>> {
+  private fun Observable<EditorEvent>.toggleHintText(): Observable<Optional<String>> {
     val randomHint = strings.newNoteHints.shuffled().first()
 
     return ofType<NoteTextChanged>()

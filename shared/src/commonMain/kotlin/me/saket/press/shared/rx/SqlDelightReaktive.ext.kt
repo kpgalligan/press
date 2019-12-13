@@ -9,7 +9,7 @@ import com.badoo.reaktive.observable.observable
 import com.badoo.reaktive.observable.observeOn
 import com.badoo.reaktive.scheduler.Scheduler
 import com.squareup.sqldelight.Query
-import me.saket.press.shared.util.Koptional
+import me.saket.press.shared.util.Optional
 import me.saket.press.shared.util.toOptional
 
 // Copied from
@@ -40,7 +40,7 @@ private class QueryListenerAndDisposable<T : Any>(
   }
 }
 
-internal fun <T : Any> Observable<Query<T>>.mapToOneOrOptional(): Observable<Koptional<T>> {
+internal fun <T : Any> Observable<Query<T>>.mapToOneOrOptional(): Observable<Optional<T>> {
   return map { it.executeAsOneOrNull().toOptional() }
 }
 
