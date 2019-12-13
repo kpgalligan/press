@@ -8,7 +8,7 @@ import com.badoo.reaktive.observable.observableOf
 import com.benasher44.uuid.Uuid
 import me.saket.press.data.shared.Note
 import me.saket.press.shared.fakedata.fakeNote
-import me.saket.press.shared.util.Optional
+import me.saket.press.shared.util.Koptional
 import me.saket.press.shared.util.toOptional
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -19,7 +19,7 @@ class FakeNoteRepository : NoteRepository {
 
   private fun findNote(noteUuid: Uuid) = savedNotes.find { it.uuid == noteUuid }
 
-  override fun note(noteUuid: Uuid): Observable<Optional<Note>> {
+  override fun note(noteUuid: Uuid): Observable<Koptional<Note>> {
     return observableFromFunction { findNote(noteUuid).toOptional() }
   }
 

@@ -6,10 +6,10 @@ import kotlin.jvm.JvmSynthetic
 /**
  * Copied from https://github.com/gojuno/koptional
  */
-sealed class Optional<out T : Any> {
+sealed class Koptional<out T : Any> {
 
     /**
-     * Converts [Optional] to either its non-null value if it's [Some] or `null` if it's [None].
+     * Converts [Koptional] to either its non-null value if it's [Some] or `null` if it's [None].
      */
     abstract fun toNullable(): T?
 
@@ -22,7 +22,7 @@ sealed class Optional<out T : Any> {
     companion object {
 
         /**
-         * Wraps an instance of T (or null) into an [Optional]:
+         * Wraps an instance of T (or null) into an [Koptional]:
          *
          * ```java
          * String a = "str";
@@ -32,20 +32,20 @@ sealed class Optional<out T : Any> {
          * Optional<String> optionalB = Optional.toOptional(b); // None
          * ```
          *
-         * This is the preferred method of obtaining an instance of [Optional] in Java. In Kotlin,
+         * This is the preferred method of obtaining an instance of [Koptional] in Java. In Kotlin,
          * prefer using the [toOptional][com.gojuno.koptional.toOptional] extension function.
          */
         @JvmStatic
-        fun <T : Any> toOptional(value: T?): Optional<T> = if (value == null) None else Some(value)
+        fun <T : Any> toOptional(value: T?): Koptional<T> = if (value == null) None else Some(value)
     }
 }
 
-data class Some<out T : Any>(val value: T) : Optional<T>() {
+data class Some<out T : Any>(val value: T) : Koptional<T>() {
     override fun toString() = "Some($value)"
     override fun toNullable(): T = value
 }
 
-object None : Optional<Nothing>() {
+object None : Koptional<Nothing>() {
     override fun toString() = "None"
 
     override fun component1(): Nothing? = null
@@ -54,7 +54,7 @@ object None : Optional<Nothing>() {
 }
 
 /**
- * Wraps an instance of T (or null) into an [Optional]:
+ * Wraps an instance of T (or null) into an [Koptional]:
  *
  * ```kotlin
  * val a: String? = "str"
@@ -64,7 +64,7 @@ object None : Optional<Nothing>() {
  * val optionalB = b.toOptional() // None
  * ```
  *
- * This is the preferred method of obtaining an instance of [Optional] in Kotlin. In Java, prefer
- * using the static [Optional.toOptional] method.
+ * This is the preferred method of obtaining an instance of [Koptional] in Kotlin. In Java, prefer
+ * using the static [Koptional.toOptional] method.
  */
-fun <T : Any> T?.toOptional(): Optional<T> = if (this == null) None else Some(this)
+fun <T : Any> T?.toOptional(): Koptional<T> = if (this == null) None else Some(this)

@@ -17,7 +17,7 @@ import me.saket.press.shared.rx.mapToList
 import me.saket.press.shared.rx.mapToOneOrOptional
 import me.saket.press.shared.rx.mapToSome
 import me.saket.press.shared.time.Clock
-import me.saket.press.shared.util.Optional
+import me.saket.press.shared.util.Koptional
 
 internal class RealNoteRepository(
   private val noteQueries: NoteQueries,
@@ -25,7 +25,7 @@ internal class RealNoteRepository(
   private val clock: Clock
 ) : NoteRepository {
 
-  override fun note(noteUuid: Uuid): Observable<Optional<Note>> {
+  override fun note(noteUuid: Uuid): Observable<Koptional<Note>> {
     return noteQueries.note(noteUuid)
         .asObservable(ioScheduler)
         .mapToOneOrOptional()
